@@ -49,7 +49,11 @@ with  open("raw.csv") as csvFile:
 			data.append([float(row[0]),int(row[1])])
 			lineCount +=  1
 ```
-From the Saleae software, we see that there is a 38kHz carrier signal, which we can easily remove, filtering out pulse shorter than 20 microseconds
+From the Saleae software, we see that there is a 38kHz carrier signal
+
+![](https://drive.google.com/uc?export=download&id=1_Q6eRiaqo5vAqeTm0pDidUP8bfCDtKUO)
+
+We can easily remove this, filtering out pulse shorter than 20 microseconds
 ```
 for i, dataPoint in enumerate(data):
     if i != len(data)-1:
