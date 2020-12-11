@@ -4,6 +4,7 @@
 **Solves:** 10  
 **Description:**
 We heard a rumor that COVID was leveraging that smart city's 'light' technology for communication. Find out in detail on the technology and what is being transmitted.
+
 [iot-challenge-1.logicdata](https://drive.google.com/uc?export=download&id=1OxDGIvqplTfN9WiAm5W9OdYnguG3onzk)
 
 
@@ -12,10 +13,12 @@ We heard a rumor that COVID was leveraging that smart city's 'light' technology 
 We are provided with a .logicdata file for the challenge. A quick google search shows that it is data from a Saleae logic analyser. We download the software from their [website](https://support.saleae.com/logic-software) to take a look at the file. 
 
 We see what looks like a bunch of data packets, one of which looks like this:
+
 ![](https://drive.google.com/uc?export=download&id=1dY63dCOfZAGo21OK-A_Zf5azBMWmbc-U)
 
 ## NEC IR Protocol
 This data looks very similar to the NEC IR Protocol
+
 ![](https://drive.google.com/uc?export=download&id=1yEE9V4L9cwoT1FRY9ZtfdpjRL1f740NB)
 
 We can find a plugin for the Saleae software for the NEC IR protocol [here](https://github.com/kodizhuk/Salae-Logic-NEC-Analyzer), but when trying it out, it seems like it is unable to parse the data properly, showing no output, probably because of the 38kHz carrier frequency.
@@ -23,6 +26,7 @@ We can find a plugin for the Saleae software for the NEC IR protocol [here](http
 ## Demodulating the Data
 
 The Saleae software allows us to export the data as a csv file, which we can use to decode the data.
+
 ![](https://drive.google.com/uc?export=download&id=1MH-Q1Rjmx6B_K90rbaDYM7lqyznoeTSf)
 
 First, we read the csv file
@@ -57,6 +61,7 @@ for i, dataPoint in enumerate(data):
                 data[i][1] = 1
 ```
 The results:
+
 ![](https://drive.google.com/uc?export=download&id=12D_vdUfdr3hAV0ZANpqSrXZ-Dl4OYAvy)
 
 Now we have the demodulated signal, we clean it up by removing consecutive `1` data points:
@@ -82,6 +87,7 @@ for i, dataPoint in enumerate(data):
 ```
 ## Decoding the Data
 Finally, we can start decoding the data.
+
 ![](https://drive.google.com/uc?export=download&id=1gz4N7CJ9ovt2gkxBoiZkBKWZtqLZ5jQN)
 
 We label the data points based on the NEC ir protocol shown above, giving each data point a range of timings to account for variations in the captured data:
